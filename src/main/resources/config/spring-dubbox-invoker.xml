@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 调用dubbo提供的网关查询RPC服务 -->
+	<!-- 黑白名单 -->
+	<dubbo:reference interface="com.run.authz.base.query.WhiteBlackBaseQueryService"
+		id="whiteBalackRpcQueryService" check="false" timeout="13000" />
+
+	<!-- 调用dubbo提供的用户中心写入RPC服务 -->
+	<dubbo:reference interface="com.run.usc.base.query.UserBaseQueryService"
+		id="userQueryRpcService" check="false" timeout="6000" />
+
+	<!-- 调用dubbo提供的用户中心接入方写入RPC服务 -->
+	<dubbo:reference interface="com.run.usc.base.query.AccUserBaseQueryService"
+		id="accUserQuery" check="false" />
+
+	<!-- 服务查询 -->
+	<dubbo:reference interface="com.run.governance.service.query.GovernanceServices"
+		id="governanceServices" check="false" />
+
+	<!-- 权限rpc -->
+	<dubbo:reference interface="com.run.authz.base.query.PermiBaseQueryService"
+		id="permiBasequeryService" check="false" />
+	<dubbo:reference interface="com.run.authz.api.base.crud.AuthzBaseCurdService"
+		id="authzBaseCurdService" check="false" timeout="6000" />
+</beans>
